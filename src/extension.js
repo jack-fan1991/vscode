@@ -11,11 +11,8 @@ exports.activate = function(context) {
     context.subscriptions.push(vscode.commands.registerCommand('extension.sayHello', function () {
         vscode.window.showInformationMessage('Hello World!');
     }));
-    context.subscriptions.push(vscode.commands.registerCommand('extension.demo.getCurrentFilePath', (uri) => {
-        vscode.window.showInformationMessage(`current path：${uri ? uri.path : '空'}`);
-    }));
-};
-
+    require('./dart_freezed.js')(context); 
+}
 /**
  * 插件被释放时触发
  */

@@ -1,12 +1,10 @@
 {
-  "freezed part ": {
-    "scope": "dart",
+  "import freezed part": {
     "prefix": ["fz.p"],
-    "body": ["part '${TM_FILENAME_BASE}.${1|g,freezed|}.dart';"],
+    "body": ["part '${TM_FILENAME_BASE}.${1|g,freezed|}.dart';", "$2"],
     "description": "create part for freezed"
   },
-  "Freezed Data Class": {
-    "scope": "dart",
+  "Create Freezed Data Class": {
     "prefix": "fzClass",
     "body": [
       "@freezed",
@@ -16,31 +14,31 @@
     ],
     "description": "Freezed Data Class"
   },
-  "Freezed class with state": {
-    "scope": "dart",
+  "Create Freezed class with state": {
     "prefix": "fzWithState",
     "body": [
       "@freezed",
       "abstract class ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}} with _$$1{",
       "  const factory $1.${2:init}(${3}) = _$1${2/(.*)/${1:/capitalize}/};",
+      "\t$4",
       "}"
     ],
-    "description": "Freezed Union for bloc state"
+    "description": "Create Freezed class with state class by base file name"
   },
-  "Create Freezed State": {
-    "scope": "dart",
+  "Add New freezed State": {
     "prefix": "fzState",
     "body": [
-      "const factory ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}}.${2:newState}(${3}) = _${TM_FILENAME_BASE}${2/(.*)/${1:/capitalize}/};"
+      "const factory ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}}.${2:newState}(${3}) = _${TM_FILENAME_BASE}${2/(.*)/${1:/capitalize}/};",
+      "\t$4"
     ],
-    "description": "Create Freezed State"
+    "description": "Add New Freezed State"
   },
   "Copy Class Name to Freezed State": {
-    "scope": "dart",
     "prefix": "fzC2State",
     "body": [
       "const factory $CLIPBOARD.${2:newState}(${3}) = _${CLIPBOARD}${2/(.*)/${1:/capitalize}/};"
     ],
     "description": "Clipboard Class Name to Freezed State"
   }
+  
 }

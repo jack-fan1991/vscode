@@ -1,6 +1,5 @@
 {
   "For Loop": {
-    "scope": "dart",
     "prefix": ["forLoop"],
     "body": ["for (final ${2:element} in ${1:array}) {", "\t$0", "}"],
     "description": "A for loop."
@@ -11,14 +10,12 @@
     "description": "Create a For-Loop Block"
   },
   "Final Member": {
-    "scope": "dart",
     "prefix": "finalMember",
     "body": ["final ${1/(.*)/${1:/camelcase}/}= ${1:Member}();"],
     "description": "Freezed Union Case for bloc state case ,copy string as default factory class name"
   },
 
   "Try Catch Block": {
-    "scope": "dart",
     "prefix": "tryCatch",
     "body": [
       "try { ",
@@ -30,7 +27,6 @@
     "description": "Create a try-catch block to use exception object"
   },
   "Try-On-Catch Block": {
-    "scope": "dart",
     "prefix": "tryOnCatch",
     "body": [
       "try { ",
@@ -45,9 +41,24 @@
     "description": "Create a try-on-catch block to handle specific exception and use exception object"
   },
   "Clipboard to factory ": {
-    "scope": "dart",
     "prefix": "c2Factory",
     "body": ["const factory ${1:$CLIPBOARD}.${2:name}(${4}) => $1($3);"],
     "description": "Clipboard to factory"
+  },
+  "Copy Class Name crate FromJson": {
+    "prefix": "c2FromJson",
+    "body": [
+      "factory ${1:$CLIPBOARD}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);",
+      "Map<String, dynamic> toJson() => _$${1}ToJson(this);"
+    ],
+    "description": "Clipboard Class Name to FromJson"
+  },
+  "Crate FromJson": {
+    "prefix": "b2fromJson",
+    "body": [
+      "factory ${1:TM_FILENAME_BASE}.fromJson(Map<String, dynamic> json) => _$${1}FromJson(json);",
+      "Map<String, dynamic> toJson() => _$${1}ToJson(this);"
+    ],
+    "description": "Crate FromJson by base filename"
   }
 }

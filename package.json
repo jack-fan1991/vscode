@@ -2,7 +2,7 @@
   "name": "jack",
   "displayName": "lazyJack",
   "description": "lets go",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "publisher": "jackFan",
   "icon": "image/lazy_man.png",
   "engines": {
@@ -18,35 +18,62 @@
   ],
   "main": "./src/extension",
   "activationEvents": [
-    "onCommand:extension.sayHello"
+    "*"
   ],
   "contributes": {
     "commands": [
       {
-        "command": "extension.sayHello",
-        "title": "Hello World"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "extension.sayHello",
-        "key": "ctrl+f10",
-        "mac": "cmd+f10",
-        "when": "editorTextFocus"
+        "category": "lazy Jack",
+        "command": "dart.import.freezed",
+        "title": "Import freezed part"
       },
       {
-        "command": "extension.demo.openWebview",
-        "key": "ctrl+f9",
-        "mac": "cmd+f9",
-        "when": "editorTextFocus"
+        "category": "lazy Jack",
+        "command": "command_create_freezed_class_by_base_fileName",
+        "title": "Create freezed class"
+      },
+      {
+        "category": "lazy Jack",
+        "command": "command_create_freezed_class_with_state_by_base_fileName",
+        "title": "Create freezed class with state"
+      },
+      {
+        "category": "lazy Jack",
+        "command": "command_add_freezed_state_by_base_fileName",
+        "title": "Add new freezed State"
+      },
+      {
+        "category": "lazy Jack",
+        "command": "command_create_from_json",
+        "title": "Crate FromJson by file name"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "when": "editorFocus",
-          "command": "extension.sayHello",
-          "group": "navigation"
+          "command": "dart.import.freezed",
+          "group": "freezed@1"
+        },
+        {
+          "when": "editorFocus",
+          "command": "command_create_freezed_class_by_base_fileName",
+          "group": "freezed@2"
+        },
+        {
+          "when": "editorFocus",
+          "command": "command_create_freezed_class_with_state_by_base_fileName",
+          "group": "freezed@3"
+        },
+        {
+          "when": "editorFocus",
+          "command": "command_create_from_json",
+          "group": "freezed@4"
+        },
+        {
+          "when": "editorFocus",
+          "command": "command_add_freezed_state_by_base_fileName",
+          "group": "freezed@5"
         }
       ]
     },
