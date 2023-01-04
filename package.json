@@ -2,7 +2,7 @@
   "name": "jack",
   "displayName": "lazyJack",
   "description": "lets go",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "publisher": "jackFan",
   "icon": "image/lazy_man.png",
   "engines": {
@@ -29,9 +29,19 @@
           "icon": "/image/rocket.svg"
         }
       ]
-    },
+    },    
+    "viewsWelcome": [
+			{
+					"view": "fast-repo-gui",
+					"contents": "Open github Repository \n[Open](command:command_open_github_repo)\n[Actions](command:command_open_github_actions)\n[Wiki](command:command_open_github_wiki)\nOpen local sourcetree\n[Open](command:command_open_sourcetree_local_repo)"
+			}
+        ],
     "views": {
       "lazy-sidebar": [
+        {
+          "id": "fast-repo-gui",
+          "name": "fast-repo-gui"
+        },
         {
           "id": "flutter-lazy-cmd",
           "name": "flutter-lazy-cmd"
@@ -39,8 +49,7 @@
         {
           "id": "build_runner-lazy-cmd",
           "name": "build_runner-lazy-cmd"
-        }
-        ,
+        },
         {
           "id": "git-lazy-cmd",
           "name": "git-lazy-cmd"

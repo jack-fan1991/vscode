@@ -42,3 +42,5 @@ export async function onTypeScript(getData: () => any[], errorData: () => any[])
   }
   return getData()
 }
+
+

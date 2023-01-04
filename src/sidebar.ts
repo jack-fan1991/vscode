@@ -1,11 +1,9 @@
 import * as vscode from 'vscode';
 import { showInfo2OptionMessage, onFlutter, onGit, onTypeScript } from './utils/common';
 import * as terminal_util from './utils/terminal_utils';
-import * as child_process from "child_process";
 
 enum ScriptsType {
     terminal = 'terminal',
-    gitBrowser = 'gitBrowser',
 }
 export const sidebar_command = "sidebar_command.onSelected";
 
@@ -48,12 +46,7 @@ const vsceScripts = [
 ]
 
 const gitScripts = [
-    {
-        scriptsType: ScriptsType.gitBrowser,
-        label: "open remote wiki",
-        script: 'git config --get remote.origin.url',
-        args: "wiki"
-    },
+
     {
         scriptsType: ScriptsType.terminal,
         label: "git force push",
@@ -65,6 +58,7 @@ const gitScripts = [
         script: 'git reflog',
     }
 ]
+
 
 
 // 树节点
@@ -205,36 +199,6 @@ export class VscodeExtensionTreeDataProvider implements vscode.TreeDataProvider<
 
 }
 
-export class GitTreeDataProvider implements vscode.TreeDataProvider<SideBarEntryItem> {
-
-    constructor(private workspaceRoot?: string) { }
-    getTreeItem(element: SideBarEntryItem): vscode.TreeItem {
-        return element
-    }
-    getChildren(
-        element?: SideBarEntryItem
-    ): vscode.ProviderResult<SideBarEntryItem[]> {
-        //子节点
-        let childrenList: any[] = []
-        let script = gitScripts
-        for (let index = 0; index < script.length; index++) {
-            let item = new SideBarEntryItem(
-                '1.0.0',
-                script[index].label ?? script[index].script,
-                vscode.TreeItemCollapsibleState.None
-            )
-            item.command = {
-                command: sidebar_command, //命令id
-                title: "run" + script[index].label + "on" + script[index].scriptsType ?? "showInformationMessage",
-                arguments: [script[index]], //命令接收的参数
-            }
-            childrenList[index] = item
-        }
-        return Promise.resolve(onGit(() => childrenList, () => []));
-    }
-
-}
-
 export function onTreeItemSelect(context: vscode.ExtensionContext, args: any) {
     console.log('[flutter-lazy-cmd] 選擇:', args)
     let scriptsType = args["scriptsType"];
@@ -247,9 +211,6 @@ export function onTreeItemSelect(context: vscode.ExtensionContext, args: any) {
         case ScriptsType.terminal:
             terminalAction(context, script)
             break;
-        case ScriptsType.gitBrowser:
-            gitBrowserAction(context, script, args['args'] == null ? [] : args['args'].split(','))
-            break;
         default:
             vscode.window.showInformationMessage("Only show => " + script)
     }
@@ -259,7 +220,7 @@ async function terminalAction(context: vscode.ExtensionContext, command: string)
     console.log('[terminalAction] 選擇:', command)
     if (command.includes("push -f")) {
         const cwd = vscode.workspace.rootPath;
-        let branch = await runCommand("cd " + cwd + " && git rev-parse --abbrev-ref HEAD")
+        let branch = await terminal_util.runCommand("cd " + cwd + " && git rev-parse --abbrev-ref HEAD")
         let gitCommand = command + " " + branch
         showInfo2OptionMessage("你確定要執行 " + gitCommand, undefined, undefined, () => (
             terminal_util.runTerminal(context, gitCommand))
@@ -269,31 +230,6 @@ async function terminalAction(context: vscode.ExtensionContext, command: string)
     showInfo2OptionMessage("你確定要執行 " + command, undefined, undefined, () => (
         terminal_util.runTerminal(context, command))
     );
-}
-
-async function gitBrowserAction(context: vscode.ExtensionContext, command: string, args: string[]) {
-    const cwd = vscode.workspace.rootPath;
-    let uri = await runCommand("cd " + cwd + " && " + command)
-    uri = uri.replace("git@github.com:", "https://git@github.com/").split('.git')[0]
-
-    if (args.length > 0) {
-        uri = uri + "/" + args[0];
-    }
-    vscode.commands.executeCommand('vscode.open', vscode.Uri.parse(uri));
-    return;
-
-}
-
-function runCommand(command: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-        child_process.exec(command, (error, stdout, stderr) => {
-            if (error) {
-                reject(error);
-            } else {
-                resolve(stdout);
-            }
-        });
-    });
 }
 
 
