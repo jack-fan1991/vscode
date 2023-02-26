@@ -1,8 +1,8 @@
 {
-  "name": "jack",
-  "displayName": "lazyJack",
+  "name": "lazy-jack",
+  "displayName": "lazy Jack",
   "description": "lets go",
-  "version": "0.0.45",
+  "version": "0.0.8",
   "publisher": "jackFan",
   "icon": "image/lazy_man.png",
   "engines": {
@@ -120,6 +120,11 @@
         "category": "lazy Jack",
         "command": "command_dart_assert",
         "title": "Generate assert file from folder"
+      },
+      {
+        "category": "lazy Jack",
+        "command": "DartPartFixer.command",
+        "title": "Dart Part Fixer"
       }
       
     ],
@@ -203,7 +208,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jack-fan1991/vscode.git"
+    "url": "https://github.com/jack-fan1991/vscode_extension_lazy_jack"
   },
   "extensionPack": [
     "FelixAngelov.bloc",

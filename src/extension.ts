@@ -1,8 +1,9 @@
 import * as vscode from 'vscode'
 import { registerDartSnippet } from './utils/snippet_utils';
-import { registerGenerateGetterSetter, registerFreezedToJson, registerToRequireParams, registerJsonToFreezed,registerCommandDartSelectedToFactory ,registerGenerateAssert} from './dart/dart';
+import {  registerGenerateGetterSetter, registerFreezedToJson, registerToRequireParams, registerJsonToFreezed, registerCommandDartSelectedToFactory, registerGenerateAssert } from './dart/dart';
 import { registerFastGithubCmd } from './github/github_utils';
 import * as sidebar from './sidebar';
+import * as codeAction from './code_action/code_action';
 
 export function activate(context: vscode.ExtensionContext) {
   console.log('your extension "sugar-demo-vscode" is now active!')
@@ -14,6 +15,9 @@ export function activate(context: vscode.ExtensionContext) {
   registerJsonToFreezed(context)
   registerCommandDartSelectedToFactory(context)
   registerGenerateAssert(context)
+  codeAction.register(context)
+
+
   //註冊 views id
   vscode.window.registerTreeDataProvider("flutter-lazy-cmd", new sidebar.FlutterTreeDataProvider());
   vscode.window.registerTreeDataProvider("build_runner-lazy-cmd", new sidebar.RunBuilderTreeDataProvider());

@@ -5,3 +5,5 @@
 export const findSubClassRegex = /class\s+([a-zA-Z]\w*)\s+extends\s+\w*/;
 export const findClassRegex = /class\s+([a-zA-Z]\w*)\s+/;
 export const findSuperClassRegex = /extends\s+([a-zA-Z]\w*)/;
+export const findImportRegex = /import\s+/;
+
